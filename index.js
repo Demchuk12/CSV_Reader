@@ -16,7 +16,7 @@ fs.createReadStream('acme_worksheet.csv')
         dateList.push(csvFile[0]['Date']);
         nameList.push(csvFile[0]['Employee Name']);
         headerObj.push({id: "name", title: "NAME/DATE"});
-        headerObj.push({id: "date1" , title: csvFile[0]['Date']});
+        headerObj.push({id: "1" , title: csvFile[0]['Date']});
         bodyObj.push({name:csvFile[0]['Employee Name']})
         let indexofDate = 2;
         for(let i = 1; i < csvFile.length; i++) {
@@ -27,11 +27,10 @@ fs.createReadStream('acme_worksheet.csv')
                     bodyObj.push({name: csvFile[i]['Employee Name']})
                 }
             }
-
            for(let date of dateList){   
                if(!dateList.includes(csvFile[i]['Date'])){
                    dateList.push(csvFile[i]['Date']);
-                   headerObj.push({id: "date" + indexofDate, title: csvFile[i]['Date']});
+                   headerObj.push({id: indexofDate, title: csvFile[i]['Date']});
                    indexofDate++;   
                }
            }
@@ -42,25 +41,24 @@ fs.createReadStream('acme_worksheet.csv')
             let index = 1;
             for(let j = 0; j < csvFile.length; j++){
                 if(csvFile[j]['Employee Name'] == bodyObj[i].name){
-                    bodyObj[i]['date' + index] = csvFile[j]["Work Hours"];
-                    index++;
+                    for(let k = 1; k < headerObj.length; k++){
+                        if(csvFile[j]['Date'] == headerObj[k].title)
+                            bodyObj[i][k] = csvFile[j]["Work Hours"];
+                            
+                    } 
+                    
                 }
             }
         }
 
-        console.log(headerObj);
+        console.log(headerObj[1].title);
         console.log(bodyObj);
 
 
         const csvWriter = createCsvWriter({
-            path: 'file.csv',
+            path: 'result.csv',
             header: headerObj
         });
-        
-       /* const records = [
-            {name: 'Bob',date1: ""},
-            {name: 'Mary', lang: 'English'}
-        ]; */
 
         csvWriter.writeRecords(bodyObj)       
             .then(() => {
@@ -74,20 +72,5 @@ fs.createReadStream('acme_worksheet.csv')
 
 
 
-/*const csvWriter = createCsvWriter({
-    path: 'file.csv',
-    header: [
-        {id: 'name_date', title: 'NAME/DATE'},
-        {id: 'lang', title: 'LANGUAGE'}
-    ]
-});
- 
-const records = [
-    {name: 'Bob',  lang: 'French, English'},
-    {name: 'Mary', lang: 'English'}
-];
- 
-csvWriter.writeRecords(records)       // returns a promise
-    .then(() => {
-        console.log('...Done');
-    });  */
+
+  
