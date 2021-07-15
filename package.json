@@ -1,0 +1,24 @@
+{
+  "name": "csv_reader",
+  "version": "1.0.0",
+  "description": "cvs reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZvasyaZ/CSV_Reader.git"
+  },
+  "author": "Vasyl Demchuk <vasyldemchuk1@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZvasyaZ/CSV_Reader/issues"
+  },
+  "homepage": "https://github.com/ZvasyaZ/CSV_Reader#readme",
+  "dependencies": {
+    "csv": "^5.5.0",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  }
+}
