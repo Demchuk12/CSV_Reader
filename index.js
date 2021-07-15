@@ -51,8 +51,6 @@ fs.createReadStream('acme_worksheet.csv')
             }
         }
 
-        console.log(headerObj[1].title);
-        console.log(bodyObj);
 
 
         const csvWriter = createCsvWriter({
